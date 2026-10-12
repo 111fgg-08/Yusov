@@ -1,1 +1,73 @@
+{% extends "base.html" %}
 
+{% block title %}
+Новая заявка — {{ app_name }}
+{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Новая заявка</h1>
+
+    <form method="post" class="form">
+        <label>
+            ФИО жителя
+            <input
+                type="text"
+                name="full_name"
+                value="{{ form.get('full_name', '') }}"
+                placeholder="Иванов Иван Иванович"
+                required
+            >
+        </label>
+
+        <label>
+            Адрес
+            <input
+                type="text"
+                name="address"
+                value="{{ form.get('address', '') }}"
+                placeholder="ул. Ленина, д. 10, кв. 25"
+                required
+            >
+        </label>
+
+        <label>
+            Телефон
+            <input
+                type="text"
+                name="phone"
+                value="{{ form.get('phone', '') }}"
+                placeholder="+7 900 000-00-00"
+            >
+        </label>
+
+        <label>
+            Категория заявки
+            <select name="category" required>
+                <option value="">Выберите категорию</option>
+
+                {% for category in categories %}
+                    <option
+                        value="{{ category }}"
+                        {% if form.get('category') == category %}selected{% endif %}
+                    >
+                        {{ category }}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            Описание проблемы
+            <textarea
+                name="description"
+                rows="6"
+                placeholder="Опишите проблему: что случилось, где, когда и т. д."
+                required
+            >{{ form.get('description', '') }}</textarea>
+        </label>
+
+        <button type="submit" class="btn">Отправить заявку</button>
+    </form>
+</section>
+{% endblock %}
