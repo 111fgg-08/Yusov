@@ -1,1 +1,33 @@
+{% extends "base.html" %}
 
+{% block title %}
+Главная — {{ app_name }}
+{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Портал подачи заявок в управляющую компанию</h1>
+
+    <p>
+        Житель может оставить заявку по вопросам ЖКХ: авария, сантехника,
+        электрика, лифт, уборка, начисления и другие проблемы.
+    </p>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-value">{{ total }}</div>
+            <div class="stat-label">Всего заявок</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-value">{{ new }}</div>
+            <div class="stat-label">Новых заявок</div>
+        </div>
+    </div>
+
+    <p>
+        <a class="btn" href="{{ url_for('request_new') }}">Подать заявку</a>
+        <a class="btn btn-secondary" href="{{ url_for('requests_list') }}">Посмотреть заявки</a>
+    </p>
+</section>
+{% endblock %}
